@@ -5,20 +5,30 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:22.14.0-alpine'
+                    image 'node:22.17.1-alpine'
                     reuseNode true
                 }
             }
             steps {
                 sh '''
+                echo "Listing files..."
                 ls -la
-                node --version
-                npm --version
-                npm install
-                npm run build
-                '''
 
-                sh 'ls -la'
+                echo "Node version:"
+                node --version
+
+                echo "NPM version:"
+                npm --version
+
+                echo "Installing dependencies..."
+                npm install
+
+                echo "Building Vite app..."
+                npm run build
+
+                echo "Final files:"
+                ls -la
+                '''
             }
         }
     }
