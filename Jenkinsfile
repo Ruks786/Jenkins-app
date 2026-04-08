@@ -32,12 +32,11 @@ pipeline {
     //         }
     //     }
     stage('Deploy') {
-        steps {
-            agents{
+            agent{
                 docker {
                     image 'amazon/aws-cli'
                     reuseNode true
-                    args '--entrypoint ""'
+                    args '--entrypoint=""'
                 }
             }   
             steps {
@@ -48,5 +47,4 @@ pipeline {
             }
         }
     }
-}
 }
